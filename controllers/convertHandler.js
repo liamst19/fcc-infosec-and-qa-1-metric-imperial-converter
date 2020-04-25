@@ -47,7 +47,7 @@ function ConvertHandler() {
   }
 
   this.getNum = function(input) {
-    var result = numRx.test(input) ? input.match(numRx)[1] ? input.match(measureRx)[1] : 1 : null;
+    var result = measureRx.test(input) ? input.match(measureRx)[1] ? input.match(measureRx)[1] : 1 : null;
     
     return result;
   };
