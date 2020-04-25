@@ -47,7 +47,7 @@ function ConvertHandler() {
   }
 
   this.getNum = function(input) {
-    var result = measureRx.test(input) ? input.match(measureRx)[1] ? input.match(measureRx)[1] : 1 : null;
+    var result = numRx.test(input) ? input.match(numRx)[1] ? input.match(measureRx)[1] : 1 : null;
     
     return result;
   };
@@ -59,19 +59,25 @@ function ConvertHandler() {
   };
   
   this.getReturnUnit = function(initUnit) {
+    if(!initUnit) return null
+    
     var result = unitConversion.hasOwnProperty(initUnit.toLowerCase()) 
     ? unitConversion[initUnit.toLowerCase()](1).returnUnit : null;
     return result;
   };
 
   this.spellOutUnit = function(unit) {
+    if(!unit) return null
+    
     var result = unitName.hasOwnProperty(unit.toLowerCase()) 
     ? unitName[unit.toLowerCase()] : null;
     
     return result;
   };
   
-  this.convert = function(initNum, initUnit) {    
+  this.convert = function(initNum, initUnit) { 
+    if(!initNum || !initUnit) return null
+    
     const numMatch = initNum.toString().match(numRx)
     const num = numMatch && numMatch[2] ? numMatch[4] ? (numMatch[2] / numMatch[4]) : numMatch[2] : 1
     
@@ -81,6 +87,8 @@ function ConvertHandler() {
   };
   
   this.getString = function(initNum, initUnit, returnNum, returnUnit) {
+    if(!returnNum || !returnUnit || !initUnit) return null
+    
     var result = `${ initNum } ${ unitName[initUnit.toLowerCase()] } converts to ${ returnNum } ${ unitName[returnUnit.toLowerCase()] }`;
     
     return result;
