@@ -8,7 +8,7 @@
 
 function ConvertHandler() {
   const measureRx = /^([-]?([0-9]+[,.]?[0-9]*)([\/]([0-9]+[,.]?[0-9]*))?)?(gal|L|lbs|kg|km|mi)$/
-  const numRx = /^([-]?([0-9]+[,.]?[0-9]*)([\/]([0-9]+[,.]?[0-9]*))*)/
+  const numRx = /^([-]?([0-9]+[,.]?[0-9]*)([\/]([0-9]+[,.]?[0-9]*))?)?(\w+)$/
   const unitRx = /(gal|L|lbs|kg|km|mi)$/i
   
   const round = (value, decimals) => {
@@ -47,10 +47,9 @@ function ConvertHandler() {
   }
 
   this.getNum = function(input) {
-    //var result = measureRx.test(input) ? input.match(measureRx)[1] ? input.match(measureRx)[1] : 1 : null;
-    const numResult = numRx.test(input) ? input.match(numRx)[0] : null;
+    const result = numRx.test(input) ? input.match(numRx)[1] : null
     
-    return result;
+    return result ? result : input && unitName.hasOwnProperty(input.toLowerCase()) ? 1 : null
   };
   
   this.getUnit = function(input) {
