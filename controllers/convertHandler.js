@@ -7,6 +7,7 @@
 */
 
 function ConvertHandler() {
+  const rxMeasure = /^([-]?([0-9]+[,.]?[0-9]*)([\/]([0-9]+[,.]?[0-9]*))?)?(gal|L|lbs|kg|km|mi)$/
   const numRx = /^([-]?([0-9]+[,.]?[0-9]*)([\/]([0-9]+[,.]?[0-9]*))*)/
   const unitRx = /(gal|L|lbs|kg|km|mi)$/
   
