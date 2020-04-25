@@ -27,11 +27,11 @@ module.exports = function (app) {
       const retObj = {
         initNum, initUnit, returnNum, returnUnit, string: toString
       }
-      console.log(retObj)
+      
       //res.json
-      if(!returnUnit && !returnNum) res.json('invalid number and unit')
-      else if(!returnUnit) res.json('invalid unit')
-      else if(!returnNum) res.json('invalid number')
+      if(!returnUnit && !returnNum) res.json({error: 'invalid number and unit'})
+      else if(!returnUnit) res.json({error: 'invalid unit'})
+      else if(!returnNum) res.json({error: 'invalid number'})
     
       res.json({
         initNum, initUnit, returnNum, returnUnit, string: toString
