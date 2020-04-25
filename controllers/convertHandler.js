@@ -7,9 +7,9 @@
 */
 
 function ConvertHandler() {
-  const measureRx = /^([-]?([0-9]+[,.]?[0-9]*)([\/]([0-9]+[,.]?[0-9]*))?)?(gal|L|lbs|kg|km|mi)$/
-  const numRx = /^([-]?([0-9]+[,.]?[0-9]*)([\/]([0-9]+[,.]?[0-9]*))?)?(\w+)$/
-  const unitRx = /(gal|L|lbs|kg|km|mi)$/
+  const measureRx = /^([-]?([0-9]+[,.]?[0-9]*)([\/]([0-9]+[,.]?[0-9]*))?)?(\w+)$/
+  const numRx = /^([-]?([0-9]+[,.]?[0-9]*)([\/]([0-9]+[,.]?[0-9]*))?)$/
+  const unitRx = /(gal|L|lbs|kg|km|mi)$/i
   
   const round = (value, decimals) => {
     return Number(Math.round(value+'e'+decimals)+'e-'+decimals)
@@ -47,13 +47,13 @@ function ConvertHandler() {
   }
 
   this.getNum = function(input) {
-    const result = numRx.test(input) ? input.match(numRx)[1] : null
+    const result = measureRx.test(input) ? input.match(measureRx)[1] : null
     
     return result ? result : input && unitName.hasOwnProperty(input.toLowerCase()) ? 1 : null
   };
   
   this.getUnit = function(input) {
-    var result = unitRx.test(input) ? input.match(unitRx)[0] : null;
+    var result = unitRx.test(input) ? input.match(unitRx)[0] : null
     
     return result;
   };
@@ -77,7 +77,7 @@ function ConvertHandler() {
   
   this.convert = function(initNum, initUnit) { 
     if(!initNum || !initUnit) return null
-    
+    console.log('initNum', {initNum, str: initNum.toString()})
     const numMatch = initNum.toString().match(numRx)
     const num = numMatch && numMatch[2] ? numMatch[4] ? (numMatch[2] / numMatch[4]) : numMatch[2] : 1
     
