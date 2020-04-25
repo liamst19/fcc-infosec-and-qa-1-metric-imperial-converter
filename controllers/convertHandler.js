@@ -77,11 +77,9 @@ function ConvertHandler() {
   
   this.convert = function(initNum, initUnit) { 
     if(!initNum || !initUnit) return null
-    console.log('initNum', {initNum, str: initNum.toString()})
     const numMatch = initNum.toString().match(numRx)
     const num = numMatch && numMatch[2] ? numMatch[4] ? (numMatch[2] / numMatch[4]) : numMatch[2] : 1
-    
-    var result = unitConversion[initUnit.toLowerCase()](initNum).returnNum;
+    var result = unitConversion[initUnit.toLowerCase()](num).returnNum;
     
     return result;
   };
