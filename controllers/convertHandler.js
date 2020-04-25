@@ -59,23 +59,22 @@ function ConvertHandler() {
   };
   
   this.getReturnUnit = function(initUnit) {
-    var result = Object.prototype.hasOwnProperty(unitConversion, initUnit) 
-    ? unitConversion[initUnit.toLowerCase()](0).returnUnit : null;
-    
+    var result = unitConversion.hasOwnProperty(initUnit.toLowerCase()) 
+    ? unitConversion[initUnit.toLowerCase()](1).returnUnit : null;
     return result;
   };
 
   this.spellOutUnit = function(unit) {
-    var result = Object.prototype.hasOwnProperty(unitName, unit) 
+    var result = unitName.hasOwnProperty(unit.toLowerCase()) 
     ? unitName[unit.toLowerCase()] : null;
     
     return result;
   };
   
   this.convert = function(initNum, initUnit) {    
-    const numMatch = initNum.match(numRx)
+    const numMatch = initNum.toString().match(numRx)
     const num = numMatch && numMatch[2] ? numMatch[4] ? (numMatch[2] / numMatch[4]) : numMatch[2] : 1
-    
+
     var result = Object.prototype.hasOwnProperty(unitConversion, initUnit) 
     ? unitConversion[initUnit.toLowerCase()](initNum).returnNum : null;
     
