@@ -9,7 +9,7 @@
 function ConvertHandler() {
   const measureRx = /^([-]?([0-9]+[,.]?[0-9]*)([\/]([0-9]+[,.]?[0-9]*))?)?(gal|L|lbs|kg|km|mi)$/
   const numRx = /^([-]?([0-9]+[,.]?[0-9]*)([\/]([0-9]+[,.]?[0-9]*))*)/
-  const unitRx = /(gal|L|lbs|kg|km|mi)$/
+  const unitRx = /(gal|L|lbs|kg|km|mi)$/i
   
   const round = (value, decimals) => {
     return Number(Math.round(value+'e'+decimals)+'e-'+decimals)
@@ -47,13 +47,13 @@ function ConvertHandler() {
   }
 
   this.getNum = function(input) {
-    var result = measureRx.test(input) ? input.match(measureRx)[1] : null;
+    var result = measureRx.test(input) ? input.match(measureRx)[1] ? input.match(measureRx)[1] : 1 : null;
     
     return result;
   };
   
   this.getUnit = function(input) {
-    var result = measureRx.test(input) ? input.match(measureRx)[5] : null;
+    var result = unitRx.test(input) ? input.match(unitRx)[0] : null;
     
     return result;
   };

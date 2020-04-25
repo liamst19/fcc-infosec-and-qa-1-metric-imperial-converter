@@ -47,8 +47,9 @@ suite('Unit Tests', function(){
     });
     
     test('No Numerical Input', function(done) {
-      
-      //done();
+      var input = 'lbs'
+      assert.equal(convertHandler.getNum(input), 1)
+      done();
     }); 
     
   });
@@ -59,12 +60,18 @@ suite('Unit Tests', function(){
       var input = ['gal','l','mi','km','lbs','kg','GAL','L','MI','KM','LBS','KG'];
       input.forEach(function(ele) {
         //assert
+        assert.equal(convertHandler.getUnit(ele), ele);
       });
       done();
     });
     
     test('Unknown Unit Input', function(done) {
-      
+      var input = ['m', 'M', 'cm', 'g', 'mg', 'yrd', 'pt'];
+      input.forEach(function(ele) {
+        //assert
+        assert.equal(convertHandler.getUnit(ele), null);
+      });
+      done();
       //done();
     });  
     
