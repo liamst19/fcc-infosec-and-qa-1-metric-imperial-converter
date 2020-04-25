@@ -9,7 +9,7 @@
 function ConvertHandler() {
   const measureRx = /^([-]?([0-9]+[,.]?[0-9]*)([\/]([0-9]+[,.]?[0-9]*))?)?(gal|L|lbs|kg|km|mi)$/
   const numRx = /^([-]?([0-9]+[,.]?[0-9]*)([\/]([0-9]+[,.]?[0-9]*))?)?(\w+)$/
-  const unitRx = /(gal|L|lbs|kg|km|mi)$/i
+  const unitRx = /(gal|L|lbs|kg|km|mi)$/
   
   const round = (value, decimals) => {
     return Number(Math.round(value+'e'+decimals)+'e-'+decimals)

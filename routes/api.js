@@ -25,14 +25,13 @@ module.exports = function (app) {
       var toString = convertHandler.getString(initNum, initUnit, returnNum, returnUnit);
 
       //res.json
-      let resObj = {}
-      if(!returnUnit && !returnNum) resObj = {error: 'invalid number and unit'}
+      let resObj;
+      if(!initUnit && !initNum) resObj = {error: 'invalid number and unit'}
       else if(!returnUnit) resObj = {error: 'invalid unit'}
       else if(!returnNum) resObj = {error: 'invalid number'}
       else resObj = {
         initNum, initUnit, returnNum, returnUnit, string: toString
       }
-      console.log(resObj)
       res.json(resObj)
     });
     
