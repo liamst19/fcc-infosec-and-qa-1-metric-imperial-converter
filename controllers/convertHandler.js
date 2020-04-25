@@ -7,7 +7,7 @@
 */
 
 function ConvertHandler() {
-  const rxMeasure = /^([-]?([0-9]+[,.]?[0-9]*)([\/]([0-9]+[,.]?[0-9]*))?)?(gal|L|lbs|kg|km|mi)$/
+  const measureRx = /^([-]?([0-9]+[,.]?[0-9]*)([\/]([0-9]+[,.]?[0-9]*))?)?(gal|L|lbs|kg|km|mi)$/
   const numRx = /^([-]?([0-9]+[,.]?[0-9]*)([\/]([0-9]+[,.]?[0-9]*))*)/
   const unitRx = /(gal|L|lbs|kg|km|mi)$/
   
@@ -47,13 +47,13 @@ function ConvertHandler() {
   }
 
   this.getNum = function(input) {
-    var result = input.match(numRx)[0];
+    var result = measureRx.test(input) ? input.match(measureRx)[1] : null;
     
     return result;
   };
   
   this.getUnit = function(input) {
-    var result = input.match(numRx)[0];
+    var result = measureRx.test(input) ? input.match(measureRx)[5] : null;
     
     return result;
   };

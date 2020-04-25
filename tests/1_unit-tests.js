@@ -24,25 +24,26 @@ suite('Unit Tests', function(){
     
     test('Decimal Input', function(done) {
       var input = '3.5gal'
-      assert.equal(convertHandler.getNum(input), 13.24894)
+      assert.equal(convertHandler.getNum(input), 3.5)
       done();
     });
-    
+   
     test('Fractional Input', function(done) {
       var input = '2/5km'
-      assert.equal(convertHandler.getNum(input), 0.24855)
+      assert.equal(convertHandler.getNum(input), '2/5')
       done();
     });
     
     test('Fractional Input w/ Decimal', function(done) {
       var input = '65.4/5.2kg'
-      assert.equal(convertHandler.getNum(input), 27.72739)
+      assert.equal(convertHandler.getNum(input), '65.4/5.2')
       done();
     });
     
     test('Invalid Input (double fraction)', function(done) {
-      
-      //done();
+      var input = '65.4/5.2/78kg'
+      assert.equal(convertHandler.getNum(input), null)
+      done();
     });
     
     test('No Numerical Input', function(done) {

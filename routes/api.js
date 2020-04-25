@@ -22,10 +22,20 @@ module.exports = function (app) {
       var initUnit = convertHandler.getUnit(input);
       var returnNum = convertHandler.convert(initNum, initUnit);
       var returnUnit = convertHandler.getReturnUnit(initUnit);
-      var toString = convertHandler.getString(initNum, initUnit, returnNum, returnUnit);   
+      var toString = convertHandler.getString(initNum, initUnit, returnNum, returnUnit);
+      
+      const retObj = {
+        initNum, initUnit, returnNum, returnUnit, string: toString
+      }
+      console.log(retObj)
       //res.json
-      if(!returnUnit && !returnNum) res.json({'invalid number and unit'})
-    else if(!returnUnit) res.json({ 'infalid unit'})
+      if(!returnUnit && !returnNum) res.json('invalid number and unit')
+      else if(!returnUnit) res.json('invalid unit')
+      else if(!returnNum) res.json('invalid number')
+    
+      res.json({
+        initNum, initUnit, returnNum, returnUnit, string: toString
+      })
     });
     
 };
